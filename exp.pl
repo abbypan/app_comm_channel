@@ -15,26 +15,42 @@ resources/plain.500KB.txt
 ];
 
 
+
+run_test(
+    'noiseXX', 
+    'data/noiseXX.csv', 
+    "type,role,sendMsgFile,handshake1_len,handshake2_len,handshake3_len,c2sCipher,c2sPlain,s2cCipher,s2cPlain,handshakeCPUTime,commCPUTime",
+    sub { return qq[java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseXX.java $_[0] $_[0]] },
+);
+
+run_test(
+    'noiseXKpsk', 
+    'data/noiseXKpsk.csv', 
+    "type,role,sendMsgFile,handshake1_len,handshake2_len,handshake3_len,c2sCipher,c2sPlain,s2cCipher,s2cPlain,handshakeCPUTime,commCPUTime",
+    sub { return qq[java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseXKpsk.java $_[0] $_[0]] },
+);
+
+run_test(
+    'noiseNNpsk', 
+    'data/noiseNNpsk.csv', 
+    "type,role,sendMsgFile,handshake1_len,handshake2_len,c2sCipher,c2sPlain,s2cCipher,s2cPlain,handshakeCPUTime,commCPUTime",
+    sub { return qq[java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseNNpsk.java $_[0] $_[0]] },
+);
+
 run_test(
     'continuity', 
     'data/continuity.csv', 
     "type,role,sendMsgFile,Send,Recv,HandshakeCPUTime,CommCPUTime",
-    sub { return qq[java -cp httpcore-4.4.16.jar continuity/runTLSEcho.java $_[0] $_[0]] },
-);
-
-run_test(
-    'xnoise', 
-    'data/xnoise.csv', 
-    "type,role,sendMsgFile,handshake1_len,handshake2_len,c2sCipher,c2sPlain,s2cCipher,s2cPlain,handshakeCPUTime,commCPUTime",
-    sub { return qq[java -cp httpcore-4.4.16.jar:xnoise/noise-java-1.0-SNAPSHOT-xnoise.jar xnoise/runXNoise.java $_[0] $_[0]] },
+    sub { return qq[java -cp resources/httpcore-4.4.16.jar continuity/runTLSEcho.java $_[0] $_[0]] },
 );
 
 run_test(
     'ukey2', 
     'data/ukey2.csv', 
     "type,role,sendMsgFile,handshake1_len,handshake2_len,handshake3_len,c2sCipher,c2sPlain,s2cCipher,s2cPlain,handshakeCPUTime,commCPUTime", 
-    sub { return qq[java -cp httpcore-4.4.16.jar:ukey2/ukey2_java_shadow.jar ukey2/runUkey2.java $_[0] $_[0]] },
+    sub { return qq[java -cp resources/httpcore-4.4.16.jar:ukey2/ukey2_java_shadow.jar ukey2/runUkey2.java $_[0] $_[0]] },
 );
+
 
 sub run_cmd {
     my ($cmd, $timeout) = @_;

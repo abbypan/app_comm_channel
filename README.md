@@ -1,29 +1,41 @@
 # app_comm_channel
 
-# jar
+# install
+    
+  $ apt install default-jre default-jdk openssl 
+  $ apt install cpanminus libcrypt-openssl-ec-perl libcrypt-openssl-bignum-perl 
+  $ cpanm Crypt::OpenSSL::Base::Func
 
-xnoise: https://github.com/abbypan/noise-java/tree/xnoise
+## jar
 
 ukey2: https://github.com/abbypan/ukey2_java
 
+noise: https://github.com/abbypan/noise-java/
+
 httpcore: https://hc.apache.org/index.html
 
-# experiment
+## experiment
     
     $ perl exp.pl
 
-# keygen
+# key derivation
    
-    $ perl key_derivation/key_derivation.pl | tee data/key_derivation.log
+    $ cd key_derivation
+    $ perl key_derivation.pl upsk
+    $ perl key_derivation.pl ud
+    $ perl key_derivation.pl udpub
+    $ perl key_derivation.pl uc
+    $ perl key_derivation.pl ucpub
 
-# test xnoise
+# test noise
 
-
-    $ java -cp httpcore-4.4.16.jar:xnoise/noise-java-1.0-SNAPSHOT-xnoise.jar xnoise/runXNoise.java resources/c2s.txt resources/s2c.txt
+    $ java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseNNpsk.java resources/c2s.txt resources/s2c.txt
+    $ java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseXKpsk.java resources/c2s.txt resources/s2c.txt
+    $ java -cp resources/httpcore-4.4.16.jar:noise/noise-java-1.0-SNAPSHOT.jar noise/runNoiseXX.java resources/c2s.txt resources/s2c.txt
 
 # test ukey2
 
-    $ java -cp httpcore-4.4.16.jar:ukey2/ukey2_java_shadow.jar ukey2/runUkey2.java resources/c2s.txt resources/s2c.txt
+    $ java -cp resources/httpcore-4.4.16.jar:ukey2/ukey2_java_shadow.jar ukey2/runUkey2.java resources/c2s.txt resources/s2c.txt
 
 # test continuity (mutual tls)
 
@@ -39,7 +51,7 @@ prepare:
 
 test:
 
-    $ java httpcore-4.4.16.jar:continuity/runTLSEcho.java resources/c2s.txt resources/s2c.txt
+    $ java -cp resources/httpcore-4.4.16.jar continuity/runTLSEcho.java resources/c2s.txt resources/s2c.txt
 
 test with client and server:
 
