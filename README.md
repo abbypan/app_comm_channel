@@ -2,9 +2,9 @@
 
 # install
     
-  $ apt install default-jre default-jdk openssl 
-  $ apt install cpanminus libcrypt-openssl-ec-perl libcrypt-openssl-bignum-perl 
-  $ cpanm Crypt::OpenSSL::Base::Func
+      $ apt install default-jre default-jdk openssl 
+      $ apt install cpanminus libcrypt-openssl-ec-perl libcrypt-openssl-bignum-perl 
+      $ cpanm Crypt::OpenSSL::Base::Func
 
 ## jar
 
